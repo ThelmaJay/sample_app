@@ -45,6 +45,9 @@ group :test do
 #Webrat - testing utility.
 
 	gem 'webrat', '0.7.1'
-end
 
+
+#Spork loads the environment once, and then maintains a pool of processes for running future tests.
+	gem 'spork'
+end
 
