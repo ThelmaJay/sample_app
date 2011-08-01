@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Ruby on Rails Tutorial Sample App | <%= @title %></title>
+		<title><%= title %></title>
 		<!-- It prevents cross-site request forgery (CSRF). -->
 		<%= csrf_meta_tag %>
+
+		<!-- It replaces the stylesheets lines. The effect of this line is to look for a file called app/views/layouts/_stylesheets.html.erb, evaluate its contents, and insert the results into the view -->
+		<%= render 'layouts/stylesheets' %>
 	</head>
 
 	<body>
-		<!-- For example this layout ensures that visiting the page /pages/home converts the contents of home.html.erb to HTML and then inserts it in place of <% yield %> -->
-		<%= yield %>
+		<div class="container">
+			<%= render'layouts/header' %>
+			<section class="round">
+				<!-- For example this layout ensures that visiting the page /pages/home converts the contents of home.html.erb to HTML and then inserts it in place of <% yield %> -->
+				<%= yield %>
+			</section>
+			<%= render 'layouts/footer' %>
+		</div>
 	</body>
 </html>
