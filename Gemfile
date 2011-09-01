@@ -35,6 +35,7 @@ gem 'sqlite3-ruby','1.3.3', :require => 'sqlite3'
 
 group :development do
 	gem 'rspec-rails', '2.0.1'
+	gem 'annotate'
 end
 
 #...it includes rspec in test mode in order to run tests...
