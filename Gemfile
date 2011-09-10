@@ -7,6 +7,8 @@ gem 'rails', '3.0.9'
 
 gem 'sqlite3-ruby','1.3.3', :require => 'sqlite3'
 
+gem 'gravatar_image_tag', '0.1.0'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
@@ -50,5 +52,7 @@ group :test do
 
 #Spork loads the environment once, and then maintains a pool of processes for running future tests.
 	gem 'spork'
+
+	gem 'factory_girl_rails', '1.0'
 end
 
