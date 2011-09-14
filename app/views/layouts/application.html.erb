@@ -13,6 +13,9 @@
 		<div class="container">
 			<%= render'layouts/header' %>
 			<section class="round">
+				<% flash.each do |key, value| %>
+					<div class="flash <%= key %>"><%= value %></div>
+				<% end %>
 				<!-- For example this layout ensures that visiting the page /pages/home converts the contents of home.html.erb to HTML and then inserts it in place of <% yield %> -->
 				<%= yield %>
 			</section>
