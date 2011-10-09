@@ -104,7 +104,7 @@ a.signup_button {
 
 /*User show page*/
 table.profile{
-	width: 100%
+	width: 100%;
 	margin-bottom: 0;
 }
 
@@ -186,4 +186,14 @@ footer{
 footer nav {
 	/*it overides the nav previous style. The footer is now centered in the bottom of the page instead of pushed off to the right like the navigation in the header*/
 	float: none;
+}
+
+
+/*INDEX STYLING*/
+ul.users {
+	margin-top: 1em;
+}
+
+.users li {
+	list-style: none;
 }
