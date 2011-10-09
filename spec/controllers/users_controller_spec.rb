@@ -289,18 +289,36 @@ end
         delete :destroy, :id => @user
         response.should redirect_to(root_path)
       end
+
+      it "should not have a link to delete the User" do
+        test_sign_in(@user)
+        delete :destroy, :id => @user
+        delete_url = "/users/102"
+        response.should_not have_selector("a", :href => delete_url , :content => "delete")
+      end
     end
     
     describe "as an admin user" do
       before(:each) do
-        admin = Factory(:user, :email => "admin@example.com", :admin => true)
-        test_sign_in(admin)
+        @admin = Factory(:user, :email => "admin@example.com", :admin => true)
+        test_sign_in(@admin)
       end
-      
+            
+      it "should have a link to delete the User" do
+        delete :destroy, :id => @user
+        response.should have_selector("a", :href => "/users/102", :content => "delete")
+      end
+
       it "should destroy the user" do
-        lambda do
+        lambda do          
           delete :destroy, :id => @user
         end.should change(User, :count).by(-1)
+      end
+      
+      it "should not destroy itself" do
+          lambda do        
+            delete :destroy, :id => @admin
+          end.should_not change(User, :count).by(-1)
       end
       
       it "should redirect to the users page" do

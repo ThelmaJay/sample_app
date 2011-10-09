@@ -3,11 +3,12 @@ class UsersController < ApplicationController
 #Use of before_filter so a particular method (in this case authenticate method) can be invoke before index, edit and update actions.
   before_filter :authenticate, :only => [:index, :edit, :update]
 
-#This seconds before_filter is added to call the correct_user method before edit and update actions.
+#This second before_filter is added to call the correct_user method before edit and update actions.
   before_filter :correct_user, :only => [:edit, :update]
   
 #before_filter to restrict access to the destroy action to admins.
-  before_filter :admin_user, :only => :destroy  
+  before_filter :admin_user, :only => :destroy
+
 #Actions
 
   def index
@@ -21,21 +22,29 @@ class UsersController < ApplicationController
   end
 
   def new
-	@user = User.new
-  	@title = "Sign up"
+    if !signed_in?
+	    @user = User.new
+  	  @title = "Sign up"
+  	else
+  	  redirect_to(root_path)
+  	end
   end
 
   def create
-	@user = User.new(params[:user])
-	if @user.save
+	if !signed_in?
+	 @user = User.new(params[:user])
+	 if @user.save
 	  sign_in @user
 		#Handle a successful save.
 		flash[:success] = "Welcome to the Sample App!"
 		redirect_to @user
-	else
+	 else
 		@title = "Sign up"
 		# @user.password=""
 		render 'new'
+	 end
+	else
+	  redirect_to(root_path)
 	end
 	end
 
@@ -58,9 +67,14 @@ class UsersController < ApplicationController
   
 #The destroy action finds the user, destroys it, and then redirects to user index
   def destroy
-    User.find(params[:id]).destroy
-    flash[:success] = "User destroyed."
-    redirect_to users_path
+    @user = User.find(params[:id])
+    if !current_user?(@user)
+      @user.destroy
+      flash[:success] = "User destroyed."
+      redirect_to users_path
+    else
+      redirect_to users_path
+    end
   end
   
   private
