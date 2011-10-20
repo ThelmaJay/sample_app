@@ -12,6 +12,9 @@ gem 'gravatar_image_tag', '0.1.0'
 #including will_paginate - To paginate users - so that (for exanple) only 30 users show up on a page at any one one time. Will_paginate is the simplest and most robust pagination method.
 gem 'will_paginate'
 
+#Faker gem allow us to make sample users with semi-realistic names and email addresses.
+gem 'faker'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
@@ -42,7 +45,7 @@ group :development do
 	gem 'rspec-rails', '2.0.1'
 	gem 'annotate'
 	#Faker gem allow us to make sample users with semi-realistic names and email addresses.
-	gem 'faker'
+	#gem 'faker'
 end
 
 #...it includes rspec in test mode in order to run tests...
