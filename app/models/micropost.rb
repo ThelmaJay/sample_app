@@ -7,4 +7,8 @@ class Micropost < ActiveRecord::Base
   validates :user_id, :presence => true
   #To get the ordering test to pass, we use a Rails facility called default_scope with an :order parameter.
   default_scope :order => 'microposts.created_at DESC'
+
+#Solution CH11-Ex1
+MAX_CHARS = 140
+validates_length_of :content, :maximum => MAX_CHARS
 end
