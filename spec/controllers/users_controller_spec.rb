@@ -93,6 +93,18 @@ describe UsersController do
       response.should have_selector("span.content", :content => mp1.content)
       response.should have_selector("span.content", :content => mp2.content)
     end
+    
+    
+    it "should not show delete link if signed in user didn't create post" do
+        #create a user (Done above)
+        #create some microposts for that user (Done above)
+        #create a user, sign that user in
+        #call show method on users controller - make sure delete links don't show
+        signed_in_user = Factory(:user, :email => "eddiewillers@tt.com")
+        test_sign_in(signed_in_user)
+        get :show, :id => @user
+        response.should_not have_selector("a", :content => "delete")
+    end  
   end
   
   describe "GET 'new'" do
