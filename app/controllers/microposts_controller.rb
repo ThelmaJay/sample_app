@@ -2,6 +2,12 @@ class MicropostsController < ApplicationController
   before_filter :authenticate, :only => [:create, :destroy]
   before_filter :authorized_user, :only => :destroy
   
+  def index
+    #just redirect to the page for the user, all the microposts for the user will be shown there
+    redirect_to user_path(find_user)
+  end
+  
+  
   def create
     @micropost = current_user.microposts.build(params[:micropost])
     if @micropost.save
