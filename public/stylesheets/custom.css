@@ -147,7 +147,7 @@ ol li p.header{
 
 ol li p.microcontent{
 	width:28em; 
-	word-wrap:break-word;
+/*	word-wrap:break-word; */
 	background-color: #FCC;
 	margin-bottom: 0.4em;
 }

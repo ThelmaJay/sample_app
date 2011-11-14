@@ -3,7 +3,7 @@
 		<%= link_to gravatar_for(feed_item.user), feed_item.user %>
 		<%= link_to feed_item.user.name, feed_item.user %> </p>
 
-		<p class="microcontent"><%= feed_item.content %></p>
+		<p class="microcontent"><%= wrap(feed_item.content) %></p>
 
 		<p class="posted">Posted <%= time_ago_in_words(feed_item.created_at) %> ago.
 		<% if current_user?(feed_item.user) %>
