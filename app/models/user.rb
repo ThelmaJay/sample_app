@@ -3,6 +3,10 @@ class User < ActiveRecord::Base
 	attr_accessible :name, :email, :password, :password_confirmation
 	
 	has_many :microposts, :dependent => :destroy
+	
+#Implementing the user/relationships has_many association
+#:dependent => :destroy is added to the association since destroying a user should also destroy that user's relationships.
+  has_many :relationships, :foreign_key => "follower_id", :dependent => :destroy
 
 	email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 

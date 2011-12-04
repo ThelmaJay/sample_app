@@ -190,6 +190,18 @@ describe User do
 	    end
 	  end
 	end
+	
+	#Testing for the user.relationships attribute
+	describe "relationships" do
+	  before(:each) do
+	    @user = User.create!(@attr)
+	    @followed = Factory(:user)
+	  end
+	  
+	  it "should have a relationships method" do 
+	    @user.should respond_to(:relationships)
+	  end
+	end
 end
 # == Schema Information
 #
