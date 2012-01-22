@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
 #Use of before_filter so a particular method (in this case authenticate method) can be invoke before index, edit and update actions.
-  before_filter :authenticate, :only => [:index, :edit, :update]
+  before_filter :authenticate, :except => [:show, :new, :create]
 
 #This second before_filter is added to call the correct_user method before edit and update actions.
   before_filter :correct_user, :only => [:edit, :update]
@@ -11,6 +11,20 @@ class UsersController < ApplicationController
 
 #Actions
 
+  def following
+    @title = "Following"
+    @user = User.find(params[:id])
+    @users = @user.following.paginate(:page => params[:page])
+    render 'show_follow'
+  end
+  
+  def followers
+    @title = "Followers"
+    @user = User.find(params[:id])
+    @users = @user.followers.paginate(:page => params[:page])
+    render 'show_follow'
+  end
+  
   def index
     @title = "All users"
     @users = User.paginate(:page => params[:page])

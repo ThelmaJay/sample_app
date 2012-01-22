@@ -1,7 +1,18 @@
 SampleApp::Application.routes.draw do
-  resources :users
+  
+  #Adding following and followers actions to the Users controller
+  #for each id get the following and followers arrays
+  #the member method means that the routes respond to URLs containing the user id  (/users/id/following & /users/id/followers)
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
+  
   resources :sessions, :only => [:new, :create, :destroy]
   resources :microposts, :only => [:create, :destroy]
+  #Adding the routes for user relationships
+  resources :relationships, :only => [:create, :destroy]
   match '/signup', :to => 'users#new'
   match '/signin', :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'
